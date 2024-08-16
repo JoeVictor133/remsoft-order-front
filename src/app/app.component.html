@@ -1,0 +1,10 @@
+<div *ngIf="isAuthenticated(); else loginTemplate">
+    <app-side-menu>
+        <router-outlet></router-outlet>
+    </app-side-menu>
+</div>
+
+
+<ng-template #loginTemplate>
+    <router-outlet></router-outlet>
+</ng-template>

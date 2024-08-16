@@ -1,0 +1,35 @@
+<div fxLayout="row" fxLayoutAlign="center center" class="login-container">
+    <mat-card class="login-card">
+        <mat-card-title class="login-title">Login</mat-card-title>
+        <mat-card-content>
+            <form (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center stretch">
+                <mat-form-field appearance="fill">
+                    <mat-label>Username</mat-label>
+                    <input matInput [(ngModel)]="username" name="username" required>
+                </mat-form-field>
+
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="password" name="password" required>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>
+                            {{ hide ? 'visibility_off' : 'visibility' }}
+                        </mat-icon>
+                    </button>
+                </mat-form-field>
+
+
+                <button mat-raised-button color="primary" type="submit" class="login-button">
+                    Login
+                </button>
+
+
+                <!-- Register Button -->
+                <button mat-raised-button color="accent" type="submit" class="login-button" (click)="navigateToRegister()">
+                    Register
+                </button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

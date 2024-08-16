@@ -1,0 +1,31 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" class="order-list-container">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="header">
+        <h1>Order List</h1>
+        <button mat-icon-button color="primary" (click)="openCreateOrderDialog()" matTooltip="Create Order">
+          <mat-icon>add_circle</mat-icon>
+      </button>
+    </div>
+
+    <mat-card *ngFor="let order of paginatedOrders" class="order-card">
+        <mat-card-title>Order #{{ order.id }}</mat-card-title>
+        <mat-card-content>
+            <p><strong>Buyer:</strong> {{ order.buyerName }}</p>
+            <p><strong>Supplier:</strong> {{ order.supplier.supplierName }}</p>
+            <p><strong>Total Products:</strong> {{ order.products.length }}</p>
+            <p><strong>Total Amount:</strong> {{ order.totalAmountPurchased | currency }}</p>
+        </mat-card-content>
+        <mat-card-actions fxLayout="row" fxLayoutAlign="space-between center">
+            <button mat-button color="primary" [routerLink]="['/orders', order.id]">
+              View Details
+          </button>
+            <span fxFlex></span>
+            <!-- This will push the delete button to the right -->
+            <button mat-icon-button color="warn" (click)="openDeleteOrderDialog(order.id!)" matTooltip="Delete Order" style="align-self: flex-end;">
+              <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+    </mat-card>
+
+    <mat-paginator [length]="orders.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" (page)="onPageChange($event)">
+    </mat-paginator>
+</div>

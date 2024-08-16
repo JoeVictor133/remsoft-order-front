@@ -1,0 +1,21 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav mode="side" opened class="sidenav">
+        <mat-nav-list>
+            <mat-list-item routerLink="/orders" routerLinkActive="active-link">Orders</mat-list-item>
+            <mat-list-item routerLink="/suppliers" routerLinkActive="active-link">Suppliers</mat-list-item>
+            <mat-list-item routerLink="/products" routerLinkActive="active-link">Products</mat-list-item>
+
+            <!-- Spacer to push the logout to the bottom -->
+            <div style="flex: 1 1 auto;"></div>
+
+            <!-- Logout button -->
+            <mat-list-item (click)="logout()" class="logout-item">
+                Logout
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <ng-content></ng-content>
+    </mat-sidenav-content>
+</mat-sidenav-container>

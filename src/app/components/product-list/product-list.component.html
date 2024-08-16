@@ -1,0 +1,19 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" class="product-list-container">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="header">
+        <h1>Product List</h1>
+        <button mat-icon-button color="primary" (click)="openCreateProductDialog()" matTooltip="Create Product">
+      <mat-icon>add_circle</mat-icon>
+    </button>
+    </div>
+
+    <mat-card *ngFor="let product of paginatedProducts" class="product-card">
+        <mat-card-title>{{ product.productName }}</mat-card-title>
+        <mat-card-content>
+            <p><strong>Quantity:</strong> {{ product.quantity }}</p>
+            <p><strong>Unit Price:</strong> {{ product.unitPrice | currency }}</p>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-paginator [length]="products.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" (page)="onPageChange($event)">
+    </mat-paginator>
+</div>

@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>Create Order</h1>
+<div mat-dialog-content>
+    <form #orderForm="ngForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Buyer Name</mat-label>
+            <input matInput [(ngModel)]="order.buyerName" name="buyerName" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Supplier</mat-label>
+            <mat-select [(ngModel)]="order.supplier" name="supplier" required>
+                <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
+                    {{ supplier.supplierName }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Products</mat-label>
+            <mat-select [(ngModel)]="selectedProducts" name="products" multiple (selectionChange)="onProductsChange($event.value)">
+                <mat-option *ngFor="let product of products" [value]="product">
+                    {{ product.productName }} ({{ product.unitPrice | currency }})
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="selected-products" *ngIf="selectedProducts.length > 0">
+            <h3>Selected Products</h3>
+            <ul>
+                <li *ngFor="let product of selectedProducts; let i = index">
+                    {{ product.productName }} - {{ product.quantity }} units at {{ product.unitPrice | currency }} each
+                    <button mat-icon-button color="warn" (click)="removeProduct(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+                </li>
+            </ul>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button (click)="onCreate()" [disabled]="orderForm.invalid">Create</button>
+</div>
